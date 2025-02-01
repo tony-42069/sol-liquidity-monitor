@@ -1,0 +1,39 @@
+{
+  "name": "sol-liquidity-monitor",
+  "version": "1.0.0",
+  "description": "Solana liquidity monitor for RKIT/SOL trading pair on Raydium",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc",
+    "start": "ts-node src/index.ts",
+    "dev": "ts-node-dev --respawn src/index.ts",
+    "clean": "rimraf dist",
+    "monitor": "ts-node src/index.ts",
+    "test": "ts-node src/index.ts"
+  },
+  "keywords": [
+    "solana",
+    "raydium",
+    "trading",
+    "liquidity"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@project-serum/anchor": "^0.26.0",
+    "@project-serum/borsh": "^0.2.5",
+    "@solana/spl-token": "^0.4.12",
+    "@solana/web3.js": "^1.98.0",
+    "@types/node": "^22.13.0",
+    "bip39": "^3.1.0",
+    "dotenv": "^16.4.7",
+    "ed25519-hd-key": "^1.3.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.7.3"
+  },
+  "devDependencies": {
+    "@types/bn.js": "^5.1.6",
+    "rimraf": "^6.0.1",
+    "ts-node-dev": "^2.0.0"
+  }
+}
