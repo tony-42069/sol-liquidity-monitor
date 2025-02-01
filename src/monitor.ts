@@ -66,15 +66,21 @@ export class LiquidityMonitor {
       const poolState = POOL_STATE_LAYOUT.decode(poolAccount.data);
       
       // Calculate current price and liquidity
-      const baseReserve = poolState.baseReserve.toNumber() / (10 ** 9); // Adjust for decimals
-      const quoteReserve = poolState.quoteReserve.toNumber() / (10 ** 9); // Adjust for decimals
+      const baseReserve = Number(poolState.baseReserve.toString()) / (10 ** 9); // Adjust for decimals
+      const quoteReserve = Number(poolState.quoteReserve.toString()) / (10 ** 9); // Adjust for decimals
       
       // Assuming SOL price is $100 for now
       // In production, we would fetch the actual SOL price from an oracle
       const SOL_PRICE_USD = 100;
       
-      const price = calculatePrice(baseReserve, quoteReserve) * SOL_PRICE_USD;
-      const liquidityUSD = calculateLiquidityUSD(baseReserve, quoteReserve, SOL_PRICE_USD);
+      // Calculate price (RKIT/SOL)
+      const price = (quoteReserve / baseReserve) * SOL_PRICE_USD;
+      
+      // Calculate total liquidity in USD
+      const liquidityUSD = (baseReserve * price) + (quoteReserve * SOL_PRICE_USD);
+      
+      console.log('Base Reserve (RKIT):', baseReserve);
+      console.log('Quote Reserve (SOL):', quoteReserve);
 
       console.log(`Current price: $${price.toFixed(2)}`);
       console.log(`Current liquidity: $${liquidityUSD.toFixed(2)}`);
