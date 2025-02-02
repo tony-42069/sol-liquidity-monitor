@@ -1,6 +1,7 @@
 import { monitor } from './monitor';
 import { executor } from './execute';
 import { CONFIG } from './config';
+import { wsServer } from './websocket-server';
 
 async function main() {
   try {
@@ -10,9 +11,10 @@ async function main() {
     console.log(`Amount to sell: ${CONFIG.AMOUNT_TO_SELL} RKIT`);
     console.log('================================\n');
 
-    // Initialize pool monitoring
+    // Initialize pool monitoring and WebSocket server
     console.log('Initializing...');
     await monitor.initialize();
+    await wsServer.start();
     console.log('Initialization complete\n');
 
     // Start monitoring loop
@@ -56,6 +58,7 @@ async function main() {
 // Handle cleanup on exit
 process.on('SIGINT', () => {
   console.log('\nGracefully shutting down...');
+  wsServer.stop();
   process.exit(0);
 });
 

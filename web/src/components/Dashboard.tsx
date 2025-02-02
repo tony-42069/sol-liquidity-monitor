@@ -114,7 +114,7 @@ const Dashboard: React.FC = () => {
         <div className="card">
           <h2 className="text-xl font-bold mb-4">Status</h2>
           <div className="flex items-center space-x-2 mb-2">
-            <div className={`w-3 h-3 rounded-full ${isConnected ? 'bg-green-500' : 'bg-red-500'}`}></div>
+            <div className={`status-indicator ${isConnected ? 'connected' : 'disconnected'}`}></div>
             <span>{isConnected ? 'Connected' : 'Disconnected'}</span>
           </div>
           <div className="grid grid-cols-2 gap-4">
@@ -155,7 +155,7 @@ const Dashboard: React.FC = () => {
         {/* Price Chart */}
         <div className="card col-span-1 md:col-span-2">
           <h2 className="text-xl font-bold mb-4">Price History</h2>
-          <div className="h-[400px]">
+          <div className="chart-container">
             <Line options={chartOptions} data={chartData} />
           </div>
         </div>
